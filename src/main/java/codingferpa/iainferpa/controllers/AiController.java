@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
+
 @RestController
 @RequestMapping("/v1")
 @AllArgsConstructor
@@ -26,6 +28,13 @@ public class AiController {
   public ResponseEntity<String> chatWithDbAccess(@RequestBody() String request) {
     return ResponseEntity.ok(
             aiService.respondWithDb(request)
+    );
+  }
+
+  @PostMapping("/generate-image")
+  public ResponseEntity<URI> generateImage(@RequestBody() String request) {
+    return ResponseEntity.ok(
+            aiService.respondWithImage(request).content().url()
     );
   }
 }

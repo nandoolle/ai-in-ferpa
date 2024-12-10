@@ -19,7 +19,7 @@ public class DbTool {
   void save(ConversationDto dto) {
     System.out.println("salvando no banco . . . ");
 
-    repository.save(new Conversation(dto.id, dto.name));
+    repository.save(new Conversation(dto.id(), dto.name()));
   }
 
   @Tool("busca mensagens no banco")

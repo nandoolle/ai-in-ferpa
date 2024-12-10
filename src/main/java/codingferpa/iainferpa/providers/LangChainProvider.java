@@ -1,9 +1,12 @@
 package codingferpa.iainferpa.providers;
 
+import codingferpa.iainferpa.config.OpenAiConfig;
 import codingferpa.iainferpa.repositories.ConversationRepository;
 import codingferpa.iainferpa.tools.DbTool;
 import codingferpa.iainferpa.tools.MailTool;
+
 import dev.langchain4j.memory.chat.MessageWindowChatMemory;
+import dev.langchain4j.model.image.ImageModel;
 import dev.langchain4j.service.AiServices;
 import codingferpa.iainferpa.providers.AssistantProvider.*;
 import org.springframework.stereotype.Component;
@@ -25,6 +28,8 @@ public class LangChainProvider {
           .build();
 
   public final AssistantWithDbAccess assistantWithDb;
+
+  public final ImageModel imageModel = OpenAiConfig.model;
 
   public LangChainProvider(ConversationRepository conversationRepository) {
     this.assistantWithDb = AiServices.builder(AssistantWithDbAccess.class)
