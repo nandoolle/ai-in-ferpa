@@ -13,16 +13,19 @@ public class AiController {
   private final AiService aiService;
 
   @PostMapping("/with-memory/{id}")
-  public ResponseEntity<String> chat (@RequestBody() String joke, @PathVariable() int id) {
-    return ResponseEntity.ok(
-            aiService.respond(id, joke)
-    );
+  public ResponseEntity<String> chatWithMemory(@PathVariable() int id, @RequestBody() String request) {
+    return ResponseEntity.ok(aiService.respond(id, request));
   }
 
   @PostMapping("/no-memory")
-  public ResponseEntity<String> chat (@RequestBody() String joke) {
+  public ResponseEntity<String> chatWithoutMemory(@RequestBody() String request) {
+    return ResponseEntity.ok(aiService.respond(request));
+  }
+
+  @PostMapping("/with-db")
+  public ResponseEntity<String> chatWithDbAccess(@RequestBody() String request) {
     return ResponseEntity.ok(
-            aiService.respond(joke)
+            aiService.respondWithDb(request)
     );
   }
 }

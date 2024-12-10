@@ -24,4 +24,12 @@ public class AssistantProvider {
     String chat(@MemoryId int memoryId, @UserMessage String userMessage);
   }
 
+  public interface AssistantWithDbAccess {
+    @SystemMessage({
+            systemMessage,
+            "você deve salvar no banco de dados a sua `conversation` com um (long id, String name)"
+    })
+    String chat(@UserMessage String userMessage);
+  }
+
 }

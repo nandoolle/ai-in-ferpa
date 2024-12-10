@@ -1,28 +1,34 @@
 package codingferpa.iainferpa.tools;
 
+import codingferpa.iainferpa.controllers.ConversationDto;
 import codingferpa.iainferpa.repositories.ConversationRepository;
-import com.resend.core.exception.ResendException;
-import com.resend.services.emails.model.CreateEmailOptions;
+import codingferpa.iainferpa.repositories.entities.Conversation;
 import dev.langchain4j.agent.tool.Tool;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
+@RequiredArgsConstructor
 public class DbTool {
 
-  @Autowired
-  private ConversationRepository repository;
+  private final ConversationRepository repository;
 
-  @Tool("Envio o resultado via e-mail para o usuário, quando solicitado pelo usuario")
-  void sendEmail(String result) {
-    System.out.println("enviando email . . . ");
+  @Tool("salve mensagem no banco")
+  void save(ConversationDto dto) {
+    System.out.println("salvando no banco . . . ");
 
-    var params = CreateEmailOptions.builder()
-            .from("Fernando Ollé <coding.ferpa@fernandolle.com>")
-            .to("fernandoribeiroolle@gmail.com")
-            .subject("Programming Dad Joke Generator v2.0 - Tabajara")
-            .html(
-                    String.format("<strong>%s</strong>", result)
-            ).build();
+    repository.save(new Conversation(dto.id, dto.name));
   }
+
+  @Tool("busca mensagens no banco")
+  List<ConversationDto> get(ConversationDto dto) {
+    System.out.println("buscando no banco . . . ");
+
+    var conversations = repository.findAll();
+
+    return conversations.stream().map(entity -> new ConversationDto(entity.id, entity.name)).toList();
+  }
+
 }

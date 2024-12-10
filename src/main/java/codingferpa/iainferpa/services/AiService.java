@@ -1,6 +1,5 @@
 package codingferpa.iainferpa.services;
 
-import codingferpa.iainferpa.providers.AssistantProvider.*;
 import codingferpa.iainferpa.providers.LangChainProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -9,15 +8,17 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class AiService {
 
-  private final Assistant assistant = LangChainProvider.assistant;
-  private final AssistantWithMemory assistantWithMemory = LangChainProvider.assistantWithMemory;
-
+  private final LangChainProvider langChainProvider;
 
   public String respond(int id, String userMessage) {
-    return assistantWithMemory.chat(id, userMessage);
+    return langChainProvider.assistantWithMemory.chat(id, userMessage);
   }
 
   public String respond(String userMessage) {
-    return assistant.chat(userMessage);
+    return langChainProvider.assistant.chat(userMessage);
+  }
+
+  public String respondWithDb(String userMessage) {
+    return langChainProvider.assistantWithDb.chat(userMessage);
   }
 }
