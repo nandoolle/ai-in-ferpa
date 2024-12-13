@@ -18,7 +18,7 @@ public class OpenAiConfig {
           .strictTools(true)
           .build();
 
-  public static final ImageModel model = OpenAiImageModel.builder()
+  public static final ImageModel dallE3 = OpenAiImageModel.builder()
           .apiKey(OPENAI_API_KEY)
           .modelName(DALL_E_3)
           .build();

@@ -1,10 +1,10 @@
 package codingferpa.iainferpa.services;
 
 import codingferpa.iainferpa.providers.LangChainProvider;
-import dev.langchain4j.data.image.Image;
-import dev.langchain4j.model.output.Response;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.net.URI;
 
 @Service
 @RequiredArgsConstructor
@@ -24,7 +24,11 @@ public class AiService {
     return langChainProvider.assistantWithDb.chat(userMessage);
   }
 
-  public Response<Image> respondWithImage(String userMessage) {
-    return langChainProvider.imageModel.generate(userMessage);
+  public String respondWithHttpApi(String userMessage) {
+    return langChainProvider.assistantWithHttpApi.chat(userMessage);
+  }
+
+  public URI respondWithImage(String userMessage) {
+    return langChainProvider.imageModel.generate(userMessage).content().url();
   }
 }

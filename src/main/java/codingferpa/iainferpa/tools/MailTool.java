@@ -6,10 +6,8 @@ import com.resend.services.emails.model.CreateEmailOptions;
 import dev.langchain4j.agent.tool.P;
 import dev.langchain4j.agent.tool.Tool;
 import dev.langchain4j.agent.tool.ToolMemoryId;
-import org.springframework.stereotype.Component;
 import codingferpa.iainferpa.config.ResendMailSender;
 
-@Component
 public class MailTool {
 
   private final Resend resend = ResendMailSender.resend;
