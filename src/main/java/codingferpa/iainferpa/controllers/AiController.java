@@ -1,8 +1,6 @@
 package codingferpa.iainferpa.controllers;
 
-import codingferpa.iainferpa.repositories.models.Voice;
 import codingferpa.iainferpa.services.AiService;
-import codingferpa.iainferpa.services.TextToSpeechService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
