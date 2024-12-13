@@ -15,6 +15,7 @@ import java.net.URI;
 public class AiController {
 
   private final AiService aiService;
+  private final TextToSpeechService voiceService;
 
   @GetMapping("/with-memory")
   public ResponseEntity<String> chatWithMemory(@RequestParam() int id, @RequestParam() String message) {
