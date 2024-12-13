@@ -3,6 +3,7 @@ package codingferpa.iainferpa.providers;
 import codingferpa.iainferpa.config.OpenAiConfig;
 import codingferpa.iainferpa.repositories.ConversationRepository;
 import codingferpa.iainferpa.tools.DbTool;
+import codingferpa.iainferpa.tools.HttpApiTool;
 import codingferpa.iainferpa.tools.MailTool;
 
 import dev.langchain4j.memory.chat.MessageWindowChatMemory;
@@ -27,9 +28,14 @@ public class LangChainProvider {
           .chatMemoryProvider(memoryId -> MessageWindowChatMemory.withMaxMessages(10))
           .build();
 
+  public final Assistant assistantWithHttpApi = AiServices.builder(Assistant .class)
+          .chatLanguageModel(gtp4o)
+          .tools(new MailTool(), new HttpApiTool())
+          .build();
+
   public final AssistantWithDbAccess assistantWithDb;
 
-  public final ImageModel imageModel = OpenAiConfig.model;
+  public final ImageModel imageModel = OpenAiConfig.dallE3;
 
   public LangChainProvider(ConversationRepository conversationRepository) {
     this.assistantWithDb = AiServices.builder(AssistantWithDbAccess.class)

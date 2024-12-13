@@ -3,9 +3,7 @@ package codingferpa.iainferpa.providers;
 import dev.langchain4j.service.MemoryId;
 import dev.langchain4j.service.SystemMessage;
 import dev.langchain4j.service.UserMessage;
-import lombok.NoArgsConstructor;
 
-@NoArgsConstructor
 public class AssistantProvider {
 
   private static final String systemMessage = """
@@ -27,7 +25,7 @@ public class AssistantProvider {
   public interface AssistantWithDbAccess {
     @SystemMessage({
             systemMessage,
-            "você deve salvar no banco de dados a sua `conversation` com um (long id, String name)"
+            "você deve salvar no banco de dados a sua `conversation` com (long id, String name)"
     })
     String chat(@UserMessage String userMessage);
   }
