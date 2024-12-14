@@ -8,7 +8,7 @@ import jakarta.persistence.Table;
 @Entity
 @Description("Query para salvar dados")
 @Table(name = "conversations")
-public record Conversation (
-  @Id @Description("Campo `id`") long id,
-  @Description("Campo `name`") String name
-) { }
+public class Conversation {
+  @Id @Description("Campo `id`") long id;
+  @Description("Campo `name`") String name;
+}
